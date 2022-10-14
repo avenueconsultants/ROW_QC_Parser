@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+         <!-- Latest compiled and minified CSS -->
+         <link 
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+            rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+            crossorigin="anonymous"
+        >
+
+        <title>PDF Parser</title>
+    </head>
+
+    <body>
+
+        <div style="margin:30px;">
+            <h1 class="text-center">PDF Parser</h1>
+
+            <form 
+                action="." 
+                method="post" 
+                enctype="multipart/form-data"
+            >
+
+            <div>
+                <label for="pdf" class="form-label">PDF: </h5>
+                <input type="file" id="pdf" name="pdf" class="form-control">
+            </div>
+
+            <br>
+
+            <div>
+                <label for="excel" class="form-label">Excel: </h5>
+                <input type="file" id="excel" name="excel" class="form-control">
+            </div>
+
+            <button  type="submit" class="btn btn-primary mt-5">Run</button>
+            </form>
+            <br>
+            <div class="row" style="margin:5px;">
+                {{ matches }}
+            </div>
+            <hr />
+            <h3>RW-53</h3>
+            {% if summary %}
+                <p><b>name: </b>{{summary.name}}</p>
+                <p><b>page numbers: </b>{{summary.page_numbers}}</p>
+                <p><b>prepared by:</b> {{summary.prepared_by}}</p>
+                <p><b>prepared by date:</b> {{summary.prepared_by_date}}</p>
+                <p><b>pin:</b> {{summary.pin}}</p>
+                <p><b>project number: </b>{{summary.project_number}}</p>
+                <p><b>region: </b>{{summary.region}}</p>
+                <p><b>county:</b> {{summary.county}}</p>
+                <p><b>route(s):</b> {{summary.routes}}</p>
+                <p><b>project name:</b> {{summary.project_name}}</p>
+                <p><b>summary number: </b>{{summary.summary_number}}</p>
+            {%endif%}
+
+            <hr />
+            <h4>Parcels</h4>
+            {% for p in parcels %}
+                <div class="row" style="margin:5px;">
+                    <p><b>parcel number:</b> {{p.parcel_number}} </p>
+                    <p><b>grantor short name: </b>{{p.grantor_name_short}}</p>
+                    <p><b>square feet:</b> {{p.square_feet}}</p>
+                    <p><b>acres: </b>{{p.acres}}</p>
+                    <p><b>deed type:</b> {{p.deed_type}}</p>
+                    <p><b>void:</b> {{p.is_void}}</p>
+                    <p><b>void and replace:</b> {{p.is_void_and_replace}}</p>
+                    <p><b>map sheets:</b> {{p.map_sheets}}</p>
+                    <p><b>notes: </b>{{p.notes}}</p>
+                </div>     
+                <hr />
+            {% endfor %}           
+
+        </div>
+
+        <script 
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+            crossorigin="anonymous">
+        </script>
+
+
+    </body>
+</html>
